@@ -1,4 +1,8 @@
-1. du -hx / | sort -rh | head -5 
-   Без учёта подкаталогов du -sh */ | sort -rh | head -5 или du -hx --max-depth=1 / | sort -rh | head -5 
+1. du -hx / | sort -rh | head -7
+   Без учёта подкаталогов du -sh */ | sort -rh | head -7 или du -hx --max-depth=1 / | sort -rh | head -7
 2. sudo useradd test
    sudo usermod -a -G sudo test
+3. Zombie процесс - завершившийся процесс который присутствует в таблице процессов ,
+а родительский процесс по какой-то причине не не удалил из таблицы процессов(не смог прочитать статус дочернего процесса
+Поиск zombie - ps aux | egrep "Z|defunct"
+4. Просмотрена команда top . В частности количество zombie процессов указывается в строке %CPU.
