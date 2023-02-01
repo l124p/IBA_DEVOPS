@@ -1,3 +1,4 @@
-1. du -hx / | sort -rh | head -n5
+1. du -hx / | sort -rh | head -5 
+   Без учёта подкаталогов du -sh */ | sort -rh | head -5
 2. sudo useradd test
    sudo usermod -a -G sudo test
