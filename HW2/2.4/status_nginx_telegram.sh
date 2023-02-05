@@ -13,5 +13,5 @@ do
     curl -s -X POST $URL -d chat_id=$ID -d text="NGINX is not running"
     systemctl start nginx
   fi
-  pause 60
+  sleep 60
 done

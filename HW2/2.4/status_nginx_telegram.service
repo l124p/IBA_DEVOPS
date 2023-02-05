@@ -1,0 +1,11 @@
+[Unit]
+Description=status_nginx_telegram
+
+[Service]
+Restart=always
+ExecStart=/opt/snt/status_nginx_telegram.sh
+KillMode=process
+
+[Install]
+WantedBy=mylti-user.target
+
