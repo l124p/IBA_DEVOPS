@@ -1,3 +1,5 @@
 #!/bin/bash
 
-grep -rwl error | xargs rm -f
+echo "Enter the file search directory"
+read -r dir
+grep -rwl error "$dir" | xargs rm -f
