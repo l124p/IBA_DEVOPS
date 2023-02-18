@@ -1,0 +1,11 @@
+version: '3'
+services:
+  nginx_d:
+    image: nginx:latest
+    volumes:
+      - vol1:/usr/share/nginx/html
+    ports:
+      - 8080:80
+volumes:
+  vol1:
+    external: true
