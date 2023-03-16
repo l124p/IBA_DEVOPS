@@ -3,7 +3,7 @@ provider "aws"{
 }
 
 resource "aws_security_group" "l124_security" {
-  name   = "l124_sec_group"
+  Name   = "l124_sec_group"
   description = "Allow SSH traffic"
   ingress {
     from_port   = 22
@@ -18,6 +18,11 @@ resource "aws_security_group" "l124_security" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  
+  tags = {
+      Name = "l124_sg"
+  }
+
 }
 
 resource "aws_instance" "l124" {
