@@ -2,24 +2,19 @@ provider "aws"{
     region = "us-east-1"
 }
 
-# resource "random_string"  "random"{
-#   length = 16
-#   special = true
-#   min_special = 5
-#   override_special = "/@&%^[]{};<>"        
-# }
+resource "random_string"  "random"{
+  length = 16
+  special = true
+  min_special = 5
+  override_special = "/@&%^[]{};<>"        
+}
 
-
-# resource "aws_ssm_parameter" "db_master_password" {
-#   name = var.pass_db
-#   description  = "Password for Db"
-#   type  = "SecureString"
-#   value = random_string.random.result
-# }
-
-# data "aws_ssm_parameter" "db_master_password" {
-#   name  = var.pass_db
-# }
+resource "aws_ssm_parameter" "db_master_password" {
+  name = var.pass_db
+  description  = "Password for Db"
+  type  = "SecureString"
+  value = random_string.random.result
+}
 
 
 resource "aws_db_instance" "l124_postgres" {
@@ -33,6 +28,7 @@ resource "aws_db_instance" "l124_postgres" {
  identifier           = var.db_identivier
  db_name              = var.db_enviroment
  username             = var.user_db
- password = data.aws_ssm_parameter.db_master_password.value
+ password = aws_ssm_parameter.db_master_password.value
 
+ depends_on = [aws_ssm_parameter.db_master_password]
 }
