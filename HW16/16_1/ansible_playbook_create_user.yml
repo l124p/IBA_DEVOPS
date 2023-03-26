@@ -1,0 +1,11 @@
+---
+
+-host: all
+ tasks:
+ - name: Add user john
+   ansible.buultin.user:
+   name: john
+   comment: John
+   #grpup: admin
+   #home: /home/john
+   
