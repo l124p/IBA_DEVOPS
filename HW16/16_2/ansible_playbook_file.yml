@@ -1,6 +1,10 @@
+---
+
+
 - hosts: all
   tasks:
   - name: Copy file
+    copy:
      src: "./test.txt"
      dest: "~"
      mode: "0644"

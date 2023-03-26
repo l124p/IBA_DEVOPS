@@ -1,11 +1,10 @@
 ---
 
--host: all
- tasks:
- - name: Add user john
-   ansible.buultin.user:
-   name: john
-   comment: John
-   #grpup: admin
-   #home: /home/john
+- hosts: all
+  tasks:
+  - name: Add user john
+    become: true
+    ansible.builtin.user:
+     name: john
+     comment: John
    
