@@ -1,0 +1,12 @@
+- hosts: all
+  tasks:
+  - name: Copy file
+     src: "./test.txt"
+     dest: "~"
+     mode: "0644"
+
+  - name: Deleting file
+    file:
+     path: "~/test.txt"
+     state: absent
+     
