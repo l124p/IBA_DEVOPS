@@ -1,0 +1,35 @@
+---
+- name: Reboot the server and install apache
+  hosts: all
+  become: yes
+  become_method: sudo 
+
+  tasks:
+    - name: Reboot the server
+      tags: reboot
+      shell: "sleep 5 && reboot"
+      async: 1
+      poll: 0
+      ignore_errors: true
+  
+    - name: Wait for the reboot and reconnect 
+      become: no
+      wait_for:
+        port: 22
+        host: '{{ (ansible_ssh_host|default(ansible_host))|default(inventory_hostname) }}'
+        search_regex: OpenSSH
+        delay: 10
+        timeout: 60
+      connection: local
+    
+    - name: Install tomcat
+      include_role:
+        name: tomcat
+      vars:
+        tomcat_ver: 9.0.64                          
+        ui_manager_user: manager                    
+        ui_manager_pass: Str0ngManagerPassw3rd      
+        ui_admin_username: admin                    
+        ui_admin_pass: Str0ngAdminPassw3rd  
+
+
