@@ -28,8 +28,8 @@
       vars:
         tomcat_ver: 9.0.64                          
         ui_manager_user: manager                    
-        ui_manager_pass: Str0ngManagerPassw3rd      
+        ui_manager_pass: manager      
         ui_admin_username: admin                    
-        ui_admin_pass: Str0ngAdminPassw3rd  
+        ui_admin_pass: admin  
 
 
