@@ -12,5 +12,3 @@ nodeGroups:
     volumeSize: 10
     ssh:
       allow: true
-    tags:
-      'iit-billing-tag': 'cloud'
