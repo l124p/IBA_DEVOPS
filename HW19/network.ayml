@@ -1,0 +1,22 @@
+RDS_SUBNET_GROUP_NAME="l124-subnet-group"
+RDS_SUBNET_GROUP_DESCRIPTION="l124-subnet-group Mongo"
+EKS_VPC_ID=$(aws eks describe-cluster --name="${EKS_CLUSTER_NAME}" \
+  --query "cluster.resourcesVpcConfig.vpcId" \
+  --output text)
+EKS_SUBNET_IDS=$(aws ec2 describe-subnets \
+  --filters "Name=vpc-id,Values=${EKS_VPC_ID}" \
+  --query 'Subnets[*].SubnetId' \
+  --output text
+)
+
+apiVersion: rds.services.k8s.aws/v1alpha1
+kind: DBSubnetGroup
+metadata:
+  name: ${RDS_SUBNET_GROUP_NAME}
+  namespace: ${APP_NAMESPACE}
+spec:
+  name: ${RDS_SUBNET_GROUP_NAME}
+  description: ${RDS_SUBNET_GROUP_DESCRIPTION}
+  subnetIDs:
+$(printf "    - %s\n" ${EKS_SUBNET_IDS})
+  tags: []

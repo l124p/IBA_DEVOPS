@@ -1,0 +1,15 @@
+apiVersion: rds.services.k8s.aws/v1alpha1
+kind: DBInstance
+metadata:
+  name: mongo
+spec:
+  allocatedStorage: 20
+  dbInstanceClass: db.t2
+  dbInstanceIdentifier: mongo
+  engine: postgres
+  engineVersion: "14"
+  masterUsername: "postgres"
+  masterUserPassword:
+    namespace: default
+    name: mongo-password
+    key: password
