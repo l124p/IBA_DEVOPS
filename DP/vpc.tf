@@ -2,9 +2,7 @@ variable "region" {
     default = "us-east-1"
 }
 data "aws_availability_zones" "available" {}
-locals {
-    cluster_name = "l124-EKS-Cluster"
-}
+
 module vpc {
     source = "terraform-aws-modules/vpc/aws"
     version = "3.2.0"

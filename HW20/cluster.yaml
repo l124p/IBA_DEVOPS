@@ -1,17 +1,12 @@
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 metadata:
-  name: l124-cluster
+  name: l124-hw20
   region: us-east-1
 nodeGroups:
   - name: ng1
-    desiredCapacity: 2
+    desiredCapacity: 3
     instanceType: t2.micro
-  #  ssh:
-  #    publicKeyName: aws-eks 
-  # - name: ng2
-  #   desiredCapacity: 1
-  #   instanceType: t2.small
-#    ssh:
-#      publicKeyName: aws-eks
-
+  - name: ng2
+    desiredCapacity: 3
+    instanceType: t2.micro

@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: php-app
-  #namespace: default
+  name: my-web-php
+
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: php
+      project: php-app
   template:
     metadata:
       labels:
-        app: php
+        project: php-app # Service will look for those PODS Labels
     spec:
       containers:
-        - name: php
+        - name: php-web
           image: 097084951758.dkr.ecr.us-east-1.amazonaws.com/web:latest
           ports:
             - containerPort: 80

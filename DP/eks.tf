@@ -1,11 +1,12 @@
 module "eks"{
     source = "terraform-aws-modules/eks/aws"
-    version = "17.1.0"
+    version = "18.30.3"
     cluster_name = local.cluster_name
-    cluster_version = "1.20"
-    subnets = module.vpc.private_subnets
+    cluster_version = "1.24"
+    #subnet = module.vpc.private_subnets
+    subnet_ids = module.vpc.private_subnets
     tags = {
-        Name = "l124-EKS-Cluster"
+        Name = "l124-DP-Cluster"
     }
     vpc_id = module.vpc.vpc_id
     workers_group_defaults = {
@@ -31,4 +32,8 @@ data "aws_eks_cluster" "cluster" {
 }
 data "aws_eks_cluster_auth" "cluster" {
     name = module.eks.cluster_id
+}
+
+locals {
+    cluster_name = "l124-DP-Cluster"
 }

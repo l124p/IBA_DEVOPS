@@ -1,19 +1,17 @@
-# apiVersion: elbv2.k8s.aws/v1beta1
-# kind: IngressClassParams
-# metadata:
-#   labels:
-#     app.kubernetes.io/name: aws-load-balancer-controller
-#   name: alb
----
 apiVersion: networking.k8s.io/v1
-kind: IngressClass
+kind: Ingress
 metadata:
-  labels:
-    app.kubernetes.io/name: aws-load-balancer-controller
-  name: alb
+   name: php-ingress
+
 spec:
-  controller: ingress.k8s.aws/alb
-  parameters:
-    apiGroup: elbv2.k8s.aws
-    kind: IngressClassParams
-    name: alb
+  rules:
+   - host: l124-php-app.com
+     http:
+       paths:
+       - path: /
+         pathType: Prefix
+         backend:
+           service:
+             name: php-app
+             port: 
+               number: 80     
