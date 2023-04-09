@@ -44,7 +44,7 @@ module "eks" {
 #   cluster_encryption_config = {
 #      resources = null
 #    }
-  create_kms_key            = false
+  #create_kms_key            = false
   cluster_encryption_config = {}
 
   eks_managed_node_group_defaults = {
@@ -63,15 +63,15 @@ module "eks" {
       desired_size = 2
     }
 
-    two = {
-      name = "node-group-2"
+    # two = {
+    #   name = "node-group-2"
 
-      instance_types = ["t2.micro"]
+    #   instance_types = ["t2.micro"]
 
-      min_size     = 2
-      max_size     = 4
-      desired_size = 2
-    }
+    #   min_size     = 2
+    #   max_size     = 4
+    #   desired_size = 2
+    # }
   }
 
 }
