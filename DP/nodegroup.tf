@@ -1,38 +1,75 @@
-resource "aws_eks_node_group" "test" {
-  cluster_name    = var.cluster_name
-  node_group_name = "test"
-  #node_role_arn   = master.worker_iam_role_arn
-  subnet_ids      = var.vpc.private_subnets_id
-  disk_size       = 20
-  taint {
-    key = "dedicated"
-    value = "gpuGroup"
-    effect = "NO_SCHEDULE"
-  }
-  scaling_config {
-      desired_size = 1
-      max_size     = 3
-      min_size     = 1
-  }
-  labels = {
-        "some-labels" = "labels"
-  }
-  instance_types = ["t2.micro"]
+# resource "eks_managed_node_group_defaults" "ng-DP"  {
+#     ami_type = "AL2_x86_64"
+
+#   }
+
+#   resource "eks_managed_node_groups" "ng-DP"  {
+#     one = {
+#       name = "node-group-1"
+
+#       instance_types = ["t2.micro"]
+
+#       min_size     = 2
+#       max_size     = 4
+#       desired_size = 2
+#     }
+
+    # two = {
+    #   name = "node-group-2"
+
+    #   instance_types = ["t2.micro"]
+
+    #   min_size     = 2
+    #   max_size     = 4
+    #   desired_size = 2
+    # }
+  #}
+
+
+# resource "aws_eks_node_group" "test" {
+#   cluster_name    = var.cluster_name
+#   node_group_name = "test"
+#   #node_role_arn   = master.worker_iam_role_arn
+#   subnet_ids      = var.vpc.private_subnets_id
+#   disk_size       = 20
+#   taint {
+#     key = "dedicated"
+#     value = "gpuGroup"
+#     effect = "NO_SCHEDULE"
+#   }
+#   scaling_config {
+#       desired_size = 1
+#       max_size     = 3
+#       min_size     = 1
+#   }
+#   labels = {
+#         "some-labels" = "labels"
+#   }
+#   instance_types = ["t2.micro"]
   #remote_access {
   #  ec2_ssh_key = ssh-key.key_name
   #}
-}
+#}
 
-#  module "eks_managed_node_group" {
-#    source = "terraform-aws-modules/eks/aws//modules/eks-managed-node-group"
+module "eks_managed_node_group" {
+  source = "terraform-aws-modules/eks/aws//modules/eks-managed-node-group"
+  version = "19.12.0"
 
-#   name            = "separate-eks-mng"
-#    cluster_name    = "l124-DP-Cluster"
-#    cluster_version = "1.25"
+  name            = "l124-DP-eks"
+  cluster_name    = "l124-DP-Cluster"
+  cluster_version = "1.25"
+  min_size     = 1
+  max_size     = 2
+  desired_size = 1
 
+  instance_types = ["t2.micro"]
+  #subnet_ids = module.subnets.public_subnet_ids
+  subnet_ids = module.vpc.private_subnets
 
-
-
+  tags = {
+    Environment = "dev"
+    Terraform   = "true"
+  }
 
    # attributes                         = ["micro"]
     #instance_types                      = "t2.micro"

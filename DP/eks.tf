@@ -30,7 +30,6 @@
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "19.12"
-  #version = "18.30.0"
 
   cluster_name    = "l124-DP-Cluster"
   cluster_version = "1.25"
@@ -39,29 +38,23 @@ module "eks" {
   subnet_ids                     = module.vpc.private_subnets
   cluster_endpoint_public_access = true
 
-    # Encryption key
-#   create_kms_key = false
-#   cluster_encryption_config = {
-#      resources = null
-#    }
-  #create_kms_key            = false
   cluster_encryption_config = {}
 
-  eks_managed_node_group_defaults = {
-    ami_type = "AL2_x86_64"
+  # eks_managed_node_group_defaults = {
+  #   ami_type = "AL2_x86_64"
 
-  }
+  # }
 
-  eks_managed_node_groups = {
-    one = {
-      name = "node-group-1"
+  # eks_managed_node_groups = {
+  #   one = {
+  #     name = "node-group-1"
 
-      instance_types = ["t2.micro"]
+  #     instance_types = ["t2.micro"]
 
-      min_size     = 2
-      max_size     = 4
-      desired_size = 2
-    }
+  #     min_size     = 2
+  #     max_size     = 4
+  #     desired_size = 2
+  #   }
 
     # two = {
     #   name = "node-group-2"
@@ -72,7 +65,7 @@ module "eks" {
     #   max_size     = 4
     #   desired_size = 2
     # }
-  }
+  #}
 
 }
 
