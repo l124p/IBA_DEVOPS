@@ -2,6 +2,35 @@ provider "aws" {
   region = local.region
 }
 
+terraform {
+ backend "s3" {
+   bucket = "l124-dp-bucket"
+   key = "dp.tfstate"
+   region = "us-east-1"
+   dynamodb_table = "l124-dp-terraform-state"
+ }
+}
+
+# module "eks"{
+#   source = "./modules/eks"
+# }
+
+# module "vpc"{
+#   source = "./modules/vpc"
+# }
+
+# module "sg"{
+#   source = "./modules/security_group"
+# }
+
+# module "dynamo"{
+#   source = "./modules/dynamo"
+# }
+
+
+
+
+
 data "aws_availability_zones" "available" {}
 
 #data "aws_availability_zones" "available" {
