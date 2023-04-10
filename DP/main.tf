@@ -5,7 +5,7 @@ provider "aws" {
 terraform {
  backend "s3" {
    bucket = "l124-dp-bucket"
-   key = "dp.tfstate"
+   key = "dp/terraform.tfstate"
    region = "us-east-1"
    dynamodb_table = "l124-dp-terraform-state"
  }
@@ -15,9 +15,9 @@ terraform {
 #   source = "./modules/eks"
 # }
 
-# module "vpc"{
-#   source = "./modules/vpc"
-# }
+module "aws_network" {
+  source = "./modules/aws_network"
+}
 
 # module "sg"{
 #   source = "./modules/security_group"

@@ -5,8 +5,8 @@ module "eks" {
   cluster_name    = "l124-DP-Cluster"
   cluster_version = "1.25"
 
-  vpc_id                         = module.vpc.vpc_id
-  subnet_ids                     = module.vpc.private_subnets
+  vpc_id                         = module.aws_network.vpc_id
+  subnet_ids                     = module.aws_network.private_subnet_ids
   cluster_endpoint_public_access = true
 
   cluster_encryption_config = {}
