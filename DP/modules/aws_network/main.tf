@@ -7,6 +7,8 @@
 #  - XX NAT Gateways in Public Subnets to give Internet access from Private Subnets
 #----------------------------------------------------------
 
+#source = "./modules/aws_network"
+
 data "aws_availability_zones" "available" {}
 
 #-------------VPC and Internet Gateway------------------------------------------

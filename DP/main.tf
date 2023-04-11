@@ -11,13 +11,17 @@ terraform {
  }
 }
 
-# module "eks"{
-#   source = "./modules/eks"
-# }
-
-module "aws_network" {
-  source = "./modules/aws_network"
+module "eks"{
+   source = "./modules/eks"
 }
+
+module "aws_ecr_repository"{
+   source = "./modules/aws_ecr_repository"
+}
+
+# module "aws_network" {
+#   source = "./modules/aws_network"
+# }
 
 # module "sg"{
 #   source = "./modules/security_group"

@@ -1,11 +1,18 @@
+#resource "aws_eks" "eks" {
+module "aws_network" {
+    source = "../aws_network"
+}
+
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "19.12"
 
   cluster_name    = "l124-DP-Cluster"
   cluster_version = "1.25"
-
+   
+ 
   vpc_id                         = module.aws_network.vpc_id
+  #vpc_id = ["${module.aws_network.vpc_id}"]
   subnet_ids                     = module.aws_network.private_subnet_ids
   cluster_endpoint_public_access = true
 
